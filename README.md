@@ -1,5 +1,38 @@
 # A_derivative
-This is a Python code for calculating the first derivative of Fermi contact interaction, also known as Bloembergen effect constants. See, e.g., Karna S.P. J. Comput. Chem. 20: 1274–1280, 1999.
+This is a Python code for calculating the first derivative of the **A<sub>*iso*</sub>** tensor (Fermi contact interaction). This quantity is also known as Bloembergen effect constants *a<sub>i</sub><sup>(1)</sup>*. See, e.g., Karna S.P. J. Comput. Chem. 20: 1274–1280, 1999.
+
+## Preparations
+Firstly, one needs to calculate the **A<sub>*iso*</sub>** tensors for the desired molecule with external electric fields using Orca software (the 5.0.4 version works well). These are the finite field calculations. Input example:
+```
+# Geo from RJB jcp 156(2022)094107                                                                                                                                                                                 
+
+! UKS CAM-B3LYP aug-cc-pVTZ-J AutoAux VeryTightSCF NoFrozenCore
+
+%MaxCore 6000
+
+% pal  nprocs  4
+end
+
+%output
+  Print[ P_Hirshfeld ] 1
+end
+
+%scf
+   EField  0.0005, 0.0, 0.0
+end
+
+* xyz  0 3
+ C                    -5.234025       2.1482889     -0.023721
+ H                    -6.224911       2.1482889      0.4001037
+ H                    -4.2431396      2.1482889      0.4001037
+*
+
+%eprnmr
+Nuclei = all C{aiso,rho};
+Nuclei = all H{aiso,rho};
+end
+```
+
 
 ## How to use
 For small molecules (less than 10 atoms):
