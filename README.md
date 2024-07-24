@@ -35,14 +35,9 @@ end
 
 
 ## How to use
-For small molecules (less than 10 atoms):
+Execute the command and provide proper information:
 ```sh
 python A_derivative.py
-```
-
-For larger molecules:
-```sh
-python A_derivative_large.py
 ```
 
 The program takes the Orca outputs as input.

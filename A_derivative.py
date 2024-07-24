@@ -7,7 +7,10 @@ field = float(field)
 output = input("Output name: ")
 
 n = os.popen("grep 'Number of atoms' " + plus_name).read()
-n = n[-2]
+if(n[-3].isdigit()):
+   n = n[-3] + n[-2]
+else:
+   n = n[-2]
 
 atom_names = os.popen("grep 'Nucleus  ' " + plus_name + "| tail -" + n).read()
 
@@ -27,7 +30,8 @@ for i in range(0, int(n)):
    minus_aiso = float(minus_aiso[-1])
    atom_name = atom_names[i]
    atom_name = atom_name.split(" ")
-   atom_name = atom_name[4]
+   pointer = atom_name.index("A:ISTP=")
+   atom_name = atom_name[pointer-2]
 
    result = ((plus_aiso - minus_aiso) * (1 / 2.8024857)) / (5.14220675 * field * 2) #result in G*m/V * 10^11
    print(atom_name + ": " + str(result))
