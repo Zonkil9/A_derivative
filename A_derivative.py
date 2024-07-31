@@ -1,4 +1,5 @@
 import os
+import readline
 
 plus_name = input("Filename with +F: ")
 minus_name = input("Filename with -F: ")
